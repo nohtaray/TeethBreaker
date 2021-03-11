@@ -20,9 +20,19 @@ public class Bullet : MonoBehaviour
         var visible = _renderer.isVisible;
         if (_shown && !visible && transform.position.y < 0)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
 
         _shown |= visible;
+    }
+
+    private void OnDestroy()
+    {
+        // https://light11.hatenadiary.com/entry/2019/11/03/223241
+        // TODO: ほかにも消さないといけないやつあるかも
+        if (_renderer != null)
+        {
+            Destroy(_renderer);
+        }
     }
 }

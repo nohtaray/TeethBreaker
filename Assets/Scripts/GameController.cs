@@ -49,7 +49,7 @@ public class GameController : MonoBehaviour
     {
         var prefab = Resources.Load<GameObject>("Prefabs/Bullet");
         var bullet = Instantiate(prefab);
-        bullet.transform.position = _camera.transform.position - new Vector3(0, .5f, 0);
+        bullet.transform.position = _camera.transform.position - new Vector3(0, .6f, 0);
 
         var rb = bullet.GetComponent<Rigidbody>();
         var force = GameController.CalculateForceToCollide(bullet.transform.position, targetPosition, velocity);

@@ -437,9 +437,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42574e0ae71d04720a3a700f513b2452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 0.1
-  velocity: 30
-  missingTargetSize: 0.15
+  interval: 0.02
+  velocity: 18
+  missingTargetSize: 0.5
   upperTeeth:
   - {fileID: 1626631925}
   - {fileID: 601292508}
