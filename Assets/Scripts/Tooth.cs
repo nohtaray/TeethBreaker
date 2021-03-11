@@ -7,18 +7,13 @@ public class Tooth : MonoBehaviour
 {
     public int maxHp = 100;
 
-    private Camera _camera;
-    private GameController _gameController;
     private Material _material;
     private int _hp;
-    private static readonly int MaterialId = Shader.PropertyToID("Tooth");
 
 
     // Start is called before the first frame update
     void Start()
     {
-        _camera = Camera.main;
-        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
         _material = GetComponent<Renderer>().material;
         _hp = maxHp;
     }
@@ -30,28 +25,6 @@ public class Tooth : MonoBehaviour
         if (_hp <= 0)
         {
             Destroy(gameObject);
-        }
-    }
-
-    private void OnMouseDown()
-    {
-        LaunchBulletIfNeeded();
-    }
-
-    private void OnMouseDrag()
-    {
-        LaunchBulletIfNeeded();
-    }
-
-    private void LaunchBulletIfNeeded()
-    {
-        var ray = _camera.ScreenPointToRay(Input.mousePosition);
-        foreach (var hit in Physics.RaycastAll(ray))
-        {
-            if (hit.collider.gameObject.CompareTag("Tooth"))
-            {
-                _gameController.LaunchBulletIfNeeded(hit.point);
-            }
         }
     }
 
