@@ -2,22 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class GameController : MonoBehaviour
 {
     public float interval;
     public float velocity;
+    public float missingTargetSize;
+    public List<GameObject> upperTeeth;
 
     private Camera _camera;
     private float _lastLaunchedTime = 0.0f;
+    private Random _rand;
 
     // Start is called before the first frame update
     void Start()
     {
         _camera = Camera.main;
-
-        interval = .1f;
-        velocity = 30;
+        _rand = new Random();
     }
 
     // Update is called once per frame
@@ -32,7 +34,14 @@ public class GameController : MonoBehaviour
     public void LaunchBulletIfNeeded(Vector3 targetPosition)
     {
         if (Time.time < _lastLaunchedTime + interval) return;
-        LaunchBullet(targetPosition);
+
+        // missingTargetSize の範囲だけランダムにずらす
+        var missR = Math.Pow(_rand.NextDouble(), 2) * this.missingTargetSize;
+        var missAngle = _rand.NextDouble() * Math.PI * 2;
+        var z = System.Numerics.Complex.FromPolarCoordinates(missR, missAngle);
+        var missVector = new Vector3((float) z.Real, (float) z.Imaginary, 0);
+
+        LaunchBullet(targetPosition + missVector);
         _lastLaunchedTime = Time.time;
     }
 

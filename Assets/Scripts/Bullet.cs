@@ -16,10 +16,13 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _shown |= _renderer.isVisible;
-        if (_shown && !_renderer.isVisible)
+        // 一度表示されたあと、下に消えたとき消す
+        var visible = _renderer.isVisible;
+        if (_shown && !visible && transform.position.y < 0)
         {
             Destroy(this.gameObject);
         }
+
+        _shown |= visible;
     }
 }

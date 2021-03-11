@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Tooth
+  - Upper Tooth
+  - Lower Tooth
   layers:
   - Default
   - TransparentFX
